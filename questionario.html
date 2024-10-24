@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário de Chiquinha Gonzaga</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+    <style>
+        .correct {
+            background-color: lightgreen;
+        }
+        .incorrect {
+            background-color: lightcoral;
+        }
+        .selected {
+            background-color: lightgray;
+        }
+        .card {
+            height: 100%;
+        }
+        .navbar {
+            background-color: green; /* Substitua pela cor desejada */
+        }
+        .green-button {
+            background-color: green; /* Cor de fundo verde */
+            color: white; /* Cor do texto branco */
+            border: none; /* Remove a borda padrão */
+        }
+        .green-button:hover {
+            background-color: darkgreen; /* Cor de fundo ao passar o mouse */
+        }
+        body {
+            background-image: url(https://wallpaperset.com/w/full/6/1/1/79763.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .bold {
+            font-weight: bold; /* Aplicando negrito */
+        }
+        
+    </style>
+</head>
+<body>
+    <main>
+        <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <h1 class="navbar-item" style="color: white;">CENTRO DE ENSINO MODERNO</h1>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="index.html" style="color: white;"><strong>Voltar a página inicial</strong></a>
+                </div>
+            </div>
+        </nav>
+    </main>
+
+    <section class="section">
+        <div class="container">
+            <h1 class="title has-text-centered" style="color: white;">Questionário de Chiquinha Gonzaga</h1>
+            <p class="subtitle has-text-centered" style="color: white;">Teste seus conhecimentos sobre a vida e obra de Chiquinha Gonzaga!</p>
+            <div class="columns is-multiline" id="quiz-container"></div>
+            <button class="button green-button is-fullwidth" id="submit-button">Ver Pontuação</button>
+            <button class="button green-button is-fullwidth" id="restart-button" style="display: none;">Refazer Quiz</button>
+            <div id="result" class="has-text-centered" style="display: none;">
+                <p id="score"></p>
+                <br>
+                <p>Obrigada por acessar nosso quiz! Volte sempre!!</p>
+                <br>
+                <br>
+                <a class="button green-button" href="index.html">Voltar à Página Inicial</a>
+        </div>
+    </section>
+
+    <script>
+        const questions = [
+            {
+                question: "1) Em que ano Chiquinha Gonzaga nasceu?",
+                options: ["A) 1847", "B) 1850", "C) 1835", "D) 1860"],
+                answer: 0 // A
+            },
+            {
+                question: "2) Qual foi a música que popularizou Chiquinha Gonzaga no carnaval?",
+                options: ["A) Corta-jaca", "B) Canção dos Pastores", "C) Ó abre alas", "D) A Corte na Roça"],
+                answer: 2 // C
+            },
+            {
+                question: "3) O que levou Chiquinha Gonzaga a fundar a Sociedade Brasileira de Autores Teatrais (Sbat)?",
+                options: [
+                    "A) O desejo de garantir o reconhecimento das mulheres na música",
+                    "B) A exploração abusiva de seu trabalho como compositora",
+                    "C) O apoio ao movimento anti-escravagista",
+                    "D) A criação de um fundo para compositores em situação de vulnerabilidade"
+                ],
+                answer: 1 // B
+            },
+            {
+                question: "4) Qual foi a importância da obra 'Corta-jaca' na vida de Chiquinha Gonzaga?",
+                options: [
+                    "A) Popularizou a marchinha de carnaval",
+                    "B) Trouxe reconhecimento político após ser executada no Palácio do Catete",
+                    "C) Foi a primeira trilha sonora composta por ela",
+                    "D) Estabeleceu seu sucesso no teatro musicado"
+                ],
+                answer: 1 // B
+            },
+            {
+                question: "5) Qual fato curioso está relacionado à criação do termo 'maestrina'?",
+                options: [
+                    "A) Chiquinha Gonzaga compôs uma música que forçou a criação do termo para mulheres",
+                    "B) Ela foi a primeira mulher a liderar uma banda militar",
+                    "C) Chiquinha Gonzaga se apresentou como maestrina na sua primeira apresentação internacional",
+                    "D) A imprensa brasileira não sabia como tratá-la por não existir o termo feminino para maestro"
+                ],
+                answer: 0 // A
+            },
+            {
+                question: "6) Além de sua contribuição musical, Chiquinha Gonzaga é conhecida por sua participação em qual causa?",
+                options: [
+                    "A) Direitos das mulheres",
+                    "B) Causa anti-escravagista",
+                    "C) Direitos trabalhistas",
+                    "D) Direito à educação gratuita"
+                ],
+                answer: 1 // B
+            },
+            {
+                question: "7) Qual gênero musical foi fortemente influenciado pelas composições de Chiquinha Gonzaga?",
+                options: ["A) Bossa Nova", "B) Samba", "C) Choro", "D) MPB"],
+                answer: 2 // C
+            },
+            {
+                question: "8) Chiquinha Gonzaga foi a autora da primeira opereta brasileira. Qual o nome dela?",
+                options: ["A) 'Forrobodó'", "B) 'O Abre Alas'", "C) 'A Dança das Horas'", "D) 'Carmela'"],
+                answer: 0 // A
+            },
+            {
+                question: "9) A vida de Chiquinha Gonzaga foi marcada por uma ruptura com o padrão feminino de sua época. Qual desses aspectos melhor representa essa ruptura?",
+                options: [
+                    "A) Casou-se com um estrangeiro",
+                    "B) Tornou-se professora universitária",
+                    "C) Separou-se do marido e viveu de sua música",
+                    "D) Abandonou a vida pública para se dedicar à caridade"
+                ],
+                answer: 2 // C
+            },
+            {
+                question: "10) Qual instrumento musical Chiquinha Gonzaga tocava com mais frequência?",
+                options: ["A) Violino", "B) Flauta", "C) Piano", "D) Violão"],
+                answer: 2 // C
+            },
+            {
+                question: "11) Qual foi a principal influência musical que Chiquinha Gonzaga recebeu na infância?",
+                options: [
+                    "A) Música popular brasileira",
+                    "B) Música clássica europeia",
+                    "C) Ritmos africanos",
+                    "D) Marchinhas de Carnaval"
+                ],
+                answer: 1 // B
+            },
+            {
+                question: "12) Qual era a relação de Chiquinha Gonzaga com o Carnaval?",
+                options: [
+                    "A) Foi uma das responsáveis pela criação das marchinhas de Carnaval",
+                    "B) Criticava as festividades",
+                    "C) Compositora de sambas-enredo para escolas de samba",
+                    "D) Participava ativamente dos desfiles"
+                ],
+                answer: 0 // A
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+
+        // Função para criar os cards do quiz
+        function createQuiz() {
+            questions.forEach((q, index) => {
+                const card = document.createElement('div');
+                card.className = 'column is-one-third';
+                card.innerHTML = `
+                    <div class="card">
+                        <div class="card-content">
+                            <p class="content">${q.question}</p>
+                            ${q.options.map((option, i) => `
+                                <label class="radio">
+                                    <input type="radio" name="question-${index}" value="${i}" />
+                                    ${option}
+                                </label>
+                            `).join('<br/>')}
+                        </div>
+                    </div>
+                `;
+                quizContainer.appendChild(card);
+            });
+        }
+
+        createQuiz();
+
+        // Função para verificar respostas
+        function checkAnswers() {
+            let score = 0;
+            questions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+                const card = quizContainer.children[index].querySelector('.card-content');
+
+                if (selected) {
+                    const selectedAnswer = parseInt(selected.value);
+                    if (selectedAnswer === q.answer) {
+                        score++;
+                        selected.parentElement.classList.add('correct');
+                    } else {
+                        selected.parentElement.classList.add('incorrect');
+                        card.children[q.answer].classList.add('correct');
+                    }
+                }
+            });
+            document.getElementById('score').innerText = `Você acertou ${score} de ${questions.length} perguntas.`;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('restart-button').style.display = 'block'; // Exibe o botão de refazer quiz
+            document.getElementById('submit-button').style.display = 'none'; // Oculta o botão de pontuação
+        }
+
+        // Função para reiniciar o quiz
+        function restartQuiz() {
+            // Limpa as seleções e esconde os resultados
+            quizContainer.innerHTML = '';
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('restart-button').style.display = 'none';
+            document.getElementById('submit-button').style.display = 'block'; // Exibe o botão de pontuação
+
+            createQuiz(); // Recria o quiz
+        }
+
+        document.getElementById('submit-button').addEventListener('click', checkAnswers);
+        document.getElementById('restart-button').addEventListener('click', restartQuiz);
+    </script>
+</body>
+</html>

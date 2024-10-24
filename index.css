@@ -1,0 +1,69 @@
+body {
+    background-image: url(https://wallpaperset.com/w/full/a/c/4/79948.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+main {
+    text-align: center;
+}
+hr {
+    border-color: black;
+}
+h1 {
+    text-align: center;
+}
+h2 {
+    color: green;
+    text-align: left;
+}
+h3 {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-shadow: 2px 2px 4px black;
+    color: black;
+}
+header {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-shadow: 2px 2px 4px black;
+    color: white;
+}
+nav {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.questionario {
+    background-color: black;
+    border-radius: 50px;;
+}
+.questionario ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: large;
+}
+.questionario ul li {
+    display: inline;
+}
+.questionario ul li a {
+    display: block;
+    color: white; 
+    text-decoration: none;
+    padding: 15px 20px;
+}
+.questionario ul li a:hover {
+    background-color: black;
+    border-radius: 50px;
+}
+img {
+    position: absolute;
+    top: 5%;
+    left: 20%;
+    transform: translateX(-50%);
+    z-index: 1;
+    width: 100px;
+    height: 100px;
+}
