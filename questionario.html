@@ -7,27 +7,26 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
     <style>
         .correct {
-            background-color: lightgreen;
+            background-color: rgb(127, 253, 127); /* Cor de fundo para resposta correta */
+            color: black; /* Cor do texto */
         }
         .incorrect {
-            background-color: lightcoral;
-        }
-        .selected {
-            background-color: lightgray;
+            background-color: rgb(247, 124, 124); /* Cor de fundo para resposta incorreta */
+            color: black; /* Cor do texto */
         }
         .card {
             height: 100%;
         }
         .navbar {
-            background-color: green; /* Substitua pela cor desejada */
+            background-color: green; /* Cor do navbar */
         }
         .green-button {
-            background-color: green; /* Cor de fundo verde */
-            color: white; /* Cor do texto branco */
+            background-color: green; /* Cor do botão */
+            color: white; /* Cor do texto */
             border: none; /* Remove a borda padrão */
         }
         .green-button:hover {
-            background-color: darkgreen; /* Cor de fundo ao passar o mouse */
+            background-color: darkgreen; /* Cor ao passar o mouse */
         }
         body {
             background-image: url(https://wallpaperset.com/w/full/6/1/1/79763.jpg);
@@ -35,9 +34,8 @@
             background-size: cover;
         }
         .bold {
-            font-weight: bold; /* Aplicando negrito */
+            font-weight: bold; /* Negrito */
         }
-        
     </style>
 </head>
 <body>
@@ -68,6 +66,7 @@
                 <br>
                 <br>
                 <a class="button green-button" href="index.html">Voltar à Página Inicial</a>
+            </div>
         </div>
     </section>
 
@@ -201,38 +200,37 @@
             let score = 0;
             questions.forEach((q, index) => {
                 const selected = document.querySelector(`input[name="question-${index}"]:checked`);
-                const card = quizContainer.children[index].querySelector('.card-content');
-
+                const card = quizContainer.children[index];
+                
                 if (selected) {
                     const selectedAnswer = parseInt(selected.value);
+                    const selectedLabel = selected.parentElement;
+
+                    // Adiciona a classe 'selected' à opção escolhida
+                    selectedLabel.classList.add('selected');
+
                     if (selectedAnswer === q.answer) {
                         score++;
-                        selected.parentElement.classList.add('correct');
+                        selectedLabel.classList.add('correct'); // Marca a resposta correta
                     } else {
-                        selected.parentElement.classList.add('incorrect');
-                        card.children[q.answer].classList.add('correct');
+                        selectedLabel.classList.add('incorrect'); // Marca a resposta incorreta
+                        // Adiciona a resposta correta
+                        const correctLabel = card.querySelector(`input[value="${q.answer}"]`).parentElement;
+                        correctLabel.classList.add('correct'); // Marca a resposta correta
                     }
+                } else {
+                    const correctLabel = card.querySelector(`input[value="${q.answer}"]`).parentElement;
+                    correctLabel.classList.add('correct'); // Marca a resposta correta se nada foi selecionado
                 }
             });
             document.getElementById('score').innerText = `Você acertou ${score} de ${questions.length} perguntas.`;
             document.getElementById('result').style.display = 'block';
-            document.getElementById('restart-button').style.display = 'block'; // Exibe o botão de refazer quiz
-            document.getElementById('submit-button').style.display = 'none'; // Oculta o botão de pontuação
-        }
-
-        // Função para reiniciar o quiz
-        function restartQuiz() {
-            // Limpa as seleções e esconde os resultados
-            quizContainer.innerHTML = '';
-            document.getElementById('result').style.display = 'none';
-            document.getElementById('restart-button').style.display = 'none';
-            document.getElementById('submit-button').style.display = 'block'; // Exibe o botão de pontuação
-
-            createQuiz(); // Recria o quiz
+            document.getElementById('submit-button').style.display = 'none';
+            document.getElementById('restart-button').style.display = 'block';
         }
 
         document.getElementById('submit-button').addEventListener('click', checkAnswers);
-        document.getElementById('restart-button').addEventListener('click', restartQuiz);
+        document.getElementById('restart-button').addEventListener('click', () => location.reload());
     </script>
 </body>
 </html>
